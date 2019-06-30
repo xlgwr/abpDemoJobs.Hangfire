@@ -31,7 +31,7 @@ namespace demo3 {
                 adapter => adapter.Execute (new WriteToConsoleYellowJobArgs { Value = "延时任务 2" }), TimeSpan.FromSeconds (10));
 
             //循环任务执行：一行代码添加重复执行的任务，其内置了常见的时间循环模式，也可基于CRON表达式来设定复杂的模式。
-            RecurringJob.AddOrUpdate (() => Console.WriteLine ("每分钟执行任务"), Cron.Minutely); //注意最小单位是分钟
+            RecurringJob.AddOrUpdate ("周期任务的名字", () => Console.WriteLine ("每分钟执行任务"), Cron.Minutely); //注意最小单位是分钟
 
             RecurringJob.AddOrUpdate<HangfireJobExecutionAdapter<WriteToConsoleYellowJobArgs>> (
                 adapter => adapter.Execute (new WriteToConsoleYellowJobArgs { Value = "每分钟执行任务 2" }), Cron.Minutely);
@@ -41,6 +41,11 @@ namespace demo3 {
 
             BackgroundJob.ContinueJobWith<HangfireJobExecutionAdapter<WriteToConsoleGreenJobArgs>> (jobId,
                 adapter => adapter.Execute (new WriteToConsoleGreenJobArgs { Value = "连续任务 2" }));
+
+            //删除指定的周期性任务
+            RecurringJob.RemoveIfExists ("周期任务的名字");
+            //立即执行周期性任务：
+            RecurringJob.Trigger ("周期任务的名字");
         }
     }
 }
