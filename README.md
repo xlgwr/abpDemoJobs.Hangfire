@@ -4,6 +4,11 @@ Abp VNext BackgroundJobs 后台服务 Demo
 ## 数据库
 ### MySql,Mariadb
 
+## docker 
+```
+docker run --name fangfire-mariadb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234567 -d mariadb
+```
+
 ## 文档说明
 https://docs.abp.io/zh-Hans/abp/latest/Background-Jobs
 
