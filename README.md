@@ -18,5 +18,6 @@ create database DemoJobsHangfire character set utf8;
 ```
 ## 运行
 ```
+dotnet restore
 dotnet run .
 ```
